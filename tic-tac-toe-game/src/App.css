@@ -7,3 +7,15 @@ body {
   background-color: #efefef;
   font-family: "Fredoka", sans-serif;
 }
+
+.x{
+  color: rgb(255,70,37);
+}
+
+.o{
+  color: rgb(44,135,255);
+}
+
+.box:hover {
+  box-shadow: 0px 0px 15px #888888;
+}
