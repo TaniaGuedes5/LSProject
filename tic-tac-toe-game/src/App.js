@@ -20,10 +20,12 @@ function App() {
   
   const handlePlayerSubmit = (playerName) => {
     if (numPlayersRegistered === 0) {
-      setPlayer1({ name: playerName, symbol: 'X' });
+      const firstPlayerSymbol = Math.random() < 0.5 ? 'X' : 'O';
+      setPlayer1({ name: playerName, symbol: firstPlayerSymbol });
       setNumPlayersRegistered(1);
     } else if (numPlayersRegistered === 1) {
-      setPlayer2({ name: playerName, symbol: 'O' });
+      const secondPlayerSymbol = player1.symbol === 'X' ? 'O' : 'X';
+      setPlayer2({ name: playerName, symbol: secondPlayerSymbol });
       setNumPlayersRegistered(2);
     }
 
