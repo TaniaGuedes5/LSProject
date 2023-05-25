@@ -15,7 +15,7 @@ function App() {
 
   const [bigBoard, setBigBoard] = useState(Array(9).fill(Array(9).fill(null)));
   const [currentPlayer, setCurrentPlayer] = useState("X");
- 
+  const [selectedMiniBoard, setSelectedMiniBoard] = useState(null);
 
   
   const handlePlayerSubmit = (playerName) => {
@@ -29,7 +29,7 @@ function App() {
       setNumPlayersRegistered(2);
     }
 
-    // Check if both players have registered
+    // Verificar se ambos estao registados
     if (numPlayersRegistered === 1) {
       setRegistrationComplete(true);
       setCurrentPlayer(player1.symbol);
@@ -37,8 +37,12 @@ function App() {
   };
 
   const handleCellClick = (boardIndex, cellIndex) => {
-    //Passo 1: atualizar tabuleiro
-    //Fazer uma cópia do estado-> para modifica
+  
+     //Verificar se a selacao do mini board é valido
+     if (selectedMiniBoard !== null && selectedMiniBoard !== boardIndex) {
+      return;
+    }
+    //Atualizar tabuleiro
     const updatedBoards = [...bigBoard];
    
     //Atualizar a célula selecionada com a marca do jogador atual; Verificar se a célula selecionada já está ocupada
@@ -51,7 +55,8 @@ function App() {
     //Atualizar o estado das placas principais e mudar para o próximo jogador
     setBigBoard(updatedBoards);
     setCurrentPlayer(currentPlayer === player1.symbol ? player2.symbol : player1.symbol);
-
+    //Atualizar o mini-tabuleiro selecionado com base no movimento anterior jogador
+    setSelectedMiniBoard(cellIndex);
   }
 
 
