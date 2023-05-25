@@ -13,3 +13,7 @@
     margin: 0.5rem;
   }
   
+
+  .box:hover {
+    box-shadow: 0px 0px 15px #888888;
+  }

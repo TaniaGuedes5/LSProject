@@ -1,0 +1,21 @@
+.big-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+    max-width: 300px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-left: 325px;
+}
+  
+.mini-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3px;
+    border: 5px solid rgb(10, 75, 187);
+    border-radius: 5%;
+}
+  
+
+  
+
