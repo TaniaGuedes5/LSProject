@@ -77,6 +77,9 @@ function App() {
         <div className="current-player">
           Current Player:<span className="nameDisplay">{currentPlayer === player1.symbol ? player1.name : player2.name}:</span> <span className="symbol"></span><span className="symbol">{currentPlayer}</span>
         </div>
+        <div className="timer">
+          Time:<span className="timeDisplay">{}</span> seconds
+        </div>
 
       </div> 
       )}

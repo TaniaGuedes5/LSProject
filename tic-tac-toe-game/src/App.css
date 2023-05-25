@@ -9,41 +9,10 @@ body {
   font-family: "Fredoka", sans-serif;
 }
 
-.x{
-  color: rgb(255,70,37);
-}
-
-.o{
-  color: rgb(44,135,255);
-}
-
-.current-player {
-  font-weight: bold;
-  color: red;
-  font-size: 30px;
-  font-family: 'Courier New', Courier, monospace;
-  margin-top: 50px;
-}
-
-.symbol{
-  font-weight: bold;
-  color: red;
-  font-size: 29px;
-  font-family: 'Courier New', Courier, monospace;
-}
-.nameDisplay{
-  font-weight: bold;
-  color: rgb(12, 57, 182);
-  font-size: 29px;
-  font-family: 'Courier New', Courier, monospace;
-}
-
 .App {
   text-align: center;
   background-color: blue;
 }
-
-
 
 .outerBox{
   background-color: rgb(237, 237, 237);
@@ -71,4 +40,44 @@ body {
   color: blue;
   font-size: 40px;
   font-family: 'Courier New', Courier, monospace;
+}
+.x{
+  color: rgb(255,70,37);
+}
+
+.o{
+  color: rgb(44,135,255);
+}
+
+.current-player {
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 50px;
+}
+.symbol{
+  font-weight: bold;
+  color: red;
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.nameDisplay{
+  font-weight: bold;
+  color: rgb(12, 57, 182);
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.timeDisplay{
+  font-weight: bold;
+  color: rgb(12, 57, 182);
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.timer {
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 50px;
 }
