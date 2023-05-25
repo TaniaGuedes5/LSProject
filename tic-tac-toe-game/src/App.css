@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  
+  text-align: center;
 }
 
 body {
@@ -17,32 +17,39 @@ body {
   color: rgb(44,135,255);
 }
 
-
-.App {
-  text-align: center;
-  padding: 20px;
-  background-color: blue;
-}
-
 .current-player {
   font-weight: bold;
   color: red;
   font-size: 30px;
   font-family: 'Courier New', Courier, monospace;
+  margin-top: 50px;
 }
+
 .symbol{
+  font-weight: bold;
+  color: red;
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.nameDisplay{
   font-weight: bold;
   color: rgb(12, 57, 182);
   font-size: 29px;
   font-family: 'Courier New', Courier, monospace;
-
 }
+
+.App {
+  text-align: center;
+  background-color: blue;
+}
+
+
+
 .outerBox{
   background-color: rgb(237, 237, 237);
-  padding: 5px;
-  border-radius: 15%;
-  box-sizing: content-box;
- 
+  padding: 10px;
+  border-radius: 10%;
+  box-sizing:content-box;
 }
 
 .title0{
