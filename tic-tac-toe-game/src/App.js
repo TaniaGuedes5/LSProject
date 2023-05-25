@@ -50,6 +50,7 @@ function App() {
       return;
     }
     //Atualizar a célula selecionada com a marca do jogador atual
+    updatedBoards[boardIndex] = [...updatedBoards[boardIndex]];
     updatedBoards[boardIndex][cellIndex] = currentPlayer;
 
     //Atualizar o estado das placas principais e mudar para o próximo jogador
