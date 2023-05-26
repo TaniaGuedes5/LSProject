@@ -65,9 +65,9 @@ function App() {
   return (
 
     <div className="App">
-     
-         {!registrationComplete ? ( 
-          <PlayerForm onSubmit={handlePlayerSubmit} />
+      
+               {!registrationComplete ? ( 
+          <PlayerForm onSubmit={handlePlayerSubmit} /> 
         ) : ( 
           <div className="outerBox">
           <div className="title0">

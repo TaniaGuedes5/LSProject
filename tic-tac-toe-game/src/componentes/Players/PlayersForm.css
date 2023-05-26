@@ -1,14 +1,14 @@
 .registerPlayer0 {
     margin-bottom: 20px;
     font-weight: bold;
-    color: rgb(239, 233, 233);
+    color: rgb(229, 78, 78);
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
 }
 .registerPlayer1 {
     margin-bottom: 20px;
     font-weight: bold;
-    color: rgb(229, 78, 78);
+    color: rgb(239, 233, 233);
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -44,6 +44,6 @@
   }
   
   button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #cad4de;
   }
   
