@@ -75,3 +75,21 @@ body {
   font-family: 'Courier New', Courier, monospace;
   margin-top: 50px;
 }
+
+.bigBoard-container {
+  position: relative;
+}
+
+.end-game-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff0000;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
