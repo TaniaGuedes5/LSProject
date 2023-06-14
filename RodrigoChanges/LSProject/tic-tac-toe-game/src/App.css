@@ -93,3 +93,25 @@ body {
   border-radius: 10px;
   text-align: center;
 }
+
+.start-button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.start-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 100% of the viewport height */
+}

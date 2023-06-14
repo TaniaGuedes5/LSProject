@@ -3,7 +3,7 @@ import "./App.css";
 import { BigBoard } from "./componentes/GameBoard/BigBoard";
 import { PlayerForm } from "./componentes/Players/PlayersForm";
 
-const MAX_TIME = 500;
+const MAX_TIME = 5000;
 
 function App() {
   const [isGameActive, setIsGameActive] = useState(true);
@@ -20,6 +20,8 @@ function App() {
   const [lockedBoards, setLockedBoards] = useState(Array(9).fill(false));
   const [smallBoardWinners, setSmallBoardWinners] = useState(Array(9).fill(null));
   const [endGameMessage, setEndGameMessage] = useState(null);
+  const [playingAgainstComputer, setPlayingAgainstComputer] = useState(false);
+  const [gameModeSelected, setGameModeSelected] = useState(false);
 
   const winningCombinations = [
     [0, 1, 2],
@@ -31,6 +33,8 @@ function App() {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
+
 
   function checkWinner(board) {
     for (let i = 0; i < winningCombinations.length; i++) {
@@ -48,13 +52,23 @@ function App() {
       const firstPlayerSymbol = Math.random() < 0.5 ? "X" : "O";
       setPlayer1({ name: playerName, symbol: firstPlayerSymbol });
       setNumPlayersRegistered(1);
-    } else if (numPlayersRegistered === 1) {
+
+      if (playingAgainstComputer) {
+        setPlayer1({ name: playerName, symbol: "X" });
+        setPlayer2({ name: "Computer", symbol: "O" });
+        setNumPlayersRegistered(2);
+        setRegistrationComplete(true);
+        setCurrentPlayer("X");
+        setPlayer1Timer(MAX_TIME);
+        setPlayer2Timer(MAX_TIME);
+        setSelectedTimer("player1");
+        return; // Early return because registration is complete
+      }
+
+    } else if (numPlayersRegistered === 1 && !playingAgainstComputer) {
       const secondPlayerSymbol = player1.symbol === "X" ? "O" : "X";
       setPlayer2({ name: playerName, symbol: secondPlayerSymbol });
       setNumPlayersRegistered(2);
-    }
-
-    if (numPlayersRegistered === 1) {
       setRegistrationComplete(true);
       setCurrentPlayer(player1.symbol);
       setPlayer1Timer(MAX_TIME);
@@ -63,12 +77,12 @@ function App() {
     }
   };
 
+
   const handleCellClick = (boardIndex, cellIndex) => {
     if (!isGameActive) {
       return;
     }
 
-    // Check if the selectedMiniBoard is locked
     const isTargetBoardLocked = selectedMiniBoard !== null && lockedBoards[selectedMiniBoard];
 
     if (!isTargetBoardLocked && selectedMiniBoard !== null && selectedMiniBoard !== boardIndex) {
@@ -76,7 +90,21 @@ function App() {
     }
 
     if (lockedBoards[boardIndex]) {
-      return; // Board is locked, do not allow cell click
+      return;
+    }
+
+    makeMove(boardIndex, cellIndex, currentPlayer);
+    setCurrentPlayer(
+        currentPlayer === player1.symbol ? player2.symbol : player1.symbol
+    );
+    setSelectedTimer(
+        currentPlayer === player1.symbol ? "player2" : "player1"
+    );
+  };
+
+  const makeMove = (boardIndex, cellIndex, playerSymbol) => {
+    if (!isGameActive) {
+      return;
     }
 
     const updatedBoards = [...bigBoard];
@@ -84,40 +112,66 @@ function App() {
       return;
     }
     updatedBoards[boardIndex] = [...updatedBoards[boardIndex]];
-    updatedBoards[boardIndex][cellIndex] = currentPlayer;
+    updatedBoards[boardIndex][cellIndex] = playerSymbol;
 
     setBigBoard(updatedBoards);
 
-    // Check for winner in small board
     const winner = checkWinner(updatedBoards[boardIndex]);
     const isDraw = updatedBoards[boardIndex].every(cell => cell !== null);
 
-    // Update locked boards and small board winners if necessary
     if (winner || isDraw) {
       const updatedLockedBoards = [...lockedBoards];
-      updatedLockedBoards[boardIndex] = true; // Lock the small board
+      updatedLockedBoards[boardIndex] = true;
       setLockedBoards(updatedLockedBoards);
 
-      // Lock the winning board if a small board has a winner
       if (winner) {
         updatedLockedBoards[selectedMiniBoard] = true;
         setLockedBoards(updatedLockedBoards);
       }
 
-      // Update the winner of the small board or set to 'D' if it's a draw
       const updatedSmallBoardWinners = [...smallBoardWinners];
       updatedSmallBoardWinners[boardIndex] = winner ? winner : (isDraw ? 'D' : null);
       setSmallBoardWinners(updatedSmallBoardWinners);
     }
-
-    setCurrentPlayer(
-        currentPlayer === player1.symbol ? player2.symbol : player1.symbol
-    );
-    setSelectedTimer(
-        currentPlayer === player1.symbol ? "player2" : "player1"
-    );
     setSelectedMiniBoard(cellIndex);
   };
+
+  const handleComputerMove = () => {
+    let boardIndex = selectedMiniBoard;
+
+    // Check if the selectedMiniBoard is locked or null
+    if (selectedMiniBoard === null || lockedBoards[boardIndex]) {
+      // Choose a random mini board that is not locked
+      const unlockedBoards = lockedBoards.map((isLocked, index) => (isLocked ? null : index)).filter(index => index !== null);
+      if (unlockedBoards.length === 0) {
+        return; // All boards are locked
+      }
+      boardIndex = unlockedBoards[Math.floor(Math.random() * unlockedBoards.length)];
+    }
+
+    // Find available cells in the selectedMiniBoard
+    const availableCells = bigBoard[boardIndex].map((cell, index) => (cell === null ? index : null)).filter(index => index !== null);
+
+    if (availableCells.length === 0) {
+      return;
+    }
+
+    const randomCellIndex = availableCells[Math.floor(Math.random() * availableCells.length)];
+
+    makeMove(boardIndex, randomCellIndex, player2.symbol);
+
+    setCurrentPlayer(player1.symbol);
+    setSelectedTimer("player1");
+  };
+
+
+
+  useEffect(() => {
+    if (playingAgainstComputer && currentPlayer === player2.symbol && isGameActive) {
+      setTimeout(handleComputerMove, 1);
+    }
+  }, [currentPlayer]);
+
 
   useEffect(() => {
     if (isGameActive) {
@@ -197,12 +251,26 @@ function App() {
     setSelectedTimer(null);
     setLockedBoards(Array(9).fill(false));
     setIsGameActive(true);
+    setEndGameMessage(null); // Clear end game message
+    setGameModeSelected(false); // Go back to game mode selection screen
   };
+
 
   return (
       <div className="App">
-        {!registrationComplete ? (
-            <PlayerForm onSubmit={handlePlayerSubmit} />
+        {!gameModeSelected ? (
+            <div className="buttons-container">
+              <button className="start-button" onClick={() => { setPlayingAgainstComputer(false); setGameModeSelected(true); }}>
+                Play Player vs Player
+              </button>
+              <button className="start-button" onClick={() => { setPlayingAgainstComputer(true); setGameModeSelected(true); }}>
+                Play Against Computer
+              </button>
+            </div>
+        ) : !registrationComplete ? (
+            <div>
+              <PlayerForm onSubmit={handlePlayerSubmit} playingAgainstComputer={playingAgainstComputer} numPlayersRegistered={numPlayersRegistered} />
+            </div>
         ) : (
             <>
               <div className="outerBox">
@@ -236,10 +304,12 @@ function App() {
                   {player1.name} Timer:{" "}
                   <span className="timeDisplay">{player1Timer}</span> seconds
                 </div>
-                <div className="timer">
-                  {player2.name} Timer:{" "}
-                  <span className="timeDisplay">{player2Timer}</span> seconds
-                </div>
+                {playingAgainstComputer ? null : (
+                    <div className="timer">
+                      {player2.name} Timer:{" "}
+                      <span className="timeDisplay">{player2Timer}</span> seconds
+                    </div>
+                )}
                 <button onClick={resetGame}>Start New Game</button>
               </div>
             </>
@@ -248,5 +318,4 @@ function App() {
   );
 
 }
-
 export default App;
