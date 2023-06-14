@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
-
 import './PlayersForm.css';
 
-export const PlayerForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
+export const PlayerForm = ({ onSubmit, playingAgainstComputer, numPlayersRegistered }) => {
+    const [playerName, setPlayerName] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name.trim() === '') {
-      return;
-    }
-    onSubmit(name);
-    setName('');
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (playerName.trim() === '') {
+            return;
+        }
+        onSubmit(playerName);
+        setPlayerName('');
+    };
 
-  const handleChange = (e) => {
-    setName(e.target.value);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-    <h1> <span className="registerPlayer0">Player</span> <span className="registerPlayer1">Register</span></h1>
-      <label className="playerName">
-      <span className="playerName0">Player </span> <span className="playerName1">Name </span>   
-        <input type="text" value={name} onChange={handleChange} />
-      </label>
-      <span>   </span>
-      <button type="submit"> Register</button>
-    </form>
-  );
+    return (
+        <form onSubmit={handleSubmit}>
+            <h1>
+                <span className="registerPlayer0">Player</span>{" "}
+                <span className="registerPlayer1">Register</span>
+            </h1>
+            <label className="playerName">
+                <span className="playerName0">{numPlayersRegistered === 0 ? 'Player 1' : 'Player 2'} Name </span>
+                <input
+                    type="text"
+                    value={playerName}
+                    onChange={(e) => setPlayerName(e.target.value)}
+                />
+            </label>
+            <span>   </span>
+            <button type="submit">Register</button>
+        </form>
+    );
 };
-
-
