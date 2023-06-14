@@ -1,0 +1,77 @@
+body {
+  margin: auto;
+  background-color: rgb(83, 83, 230);
+}
+
+.App {
+  text-align: center;
+
+}
+
+.outerBox{
+  background-color: rgb(237, 237, 237);
+  padding: 1px;
+  border-radius: 10%;
+  margin:auto;
+ }
+
+.title0{
+  font-weight: bold;
+  color: rgb(12, 57, 182);
+  font-size: 40px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-right: 100px;
+  margin-top: 10px;
+}
+.t1{
+  font-weight: bold;
+  color: red;
+  font-size: 40px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.t2{
+  font-weight: bold;
+  color: blue;
+  font-size: 40px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.x{
+  color: rgb(255,70,37);
+}
+
+.o{
+  color: rgb(44,135,255);
+}
+
+.current-player {
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 50px;
+}
+.symbol{
+  font-weight: bold;
+  color: red;
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.nameDisplay{
+  font-weight: bold;
+  color: rgb(12, 57, 182);
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.timeDisplay{
+  font-weight: bold;
+  color: rgb(12, 57, 182);
+  font-size: 29px;
+  font-family: 'Courier New', Courier, monospace;
+}
+.timer {
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 50px;
+}
